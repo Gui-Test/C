@@ -1,5 +1,5 @@
-int main ()
-{
+int main (){
+	
 	int numero,i;
 	i=2;
 	
@@ -9,8 +9,12 @@ int main ()
 	while (numero % i != 0){
 		if ( i != numero/2){
 		i = i++;
+		}
 		else{
 		i = numero;
 		printf ("O número é primo");
 		};
-return 0;
+	}
+	
+	return 0;
+}
