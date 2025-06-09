@@ -8,29 +8,25 @@ int main(){
    printf("Digite a idade:\n");
    scanf("%i",idade);
    if (idade >4) {
-      if (idade>=5) & (idade<=7) {
+      if (idade>=5 && idade<=7) {
          scanf("Inf A");
-      else {
-         if(idade>=8) & (idade<=10) {
+      }else {
+         if(idade>=8 && idade<=10) {
            scanf("Inf B");
-         else {
-            if(idade>=11) & (idade<=13){
+         }else {
+            if(idade>=11 && idade<=13){
                scanf("Juv A");
-            else{
-               if(idade>=14) & (idade<=17){
+            }else{
+               if(idade>=14 && idade<=17){
                   scanf("Juv B");
-               else{
+               }else{
                   scanf("Adulto");
-      }
-   }
-   }
-   }
-}
+               }
+            }
          }
       }
-}
-   else{
+   } else{
       scanf("Nao pode competir");
-}
+   }
 
 }
