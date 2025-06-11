@@ -36,3 +36,29 @@ int main(){
 }*/
 
 //Exc3
+/*#define N 8
+int main(){
+
+    int i,v[N] = {10, 3, 4 ,5, -6, 7, 8, 9}, menor, imenor;
+
+    menor = v[0];
+
+    for (i = 0; i < N;i++){
+           
+            if (v[i]< menor){
+                menor = v[i];
+                imenor = i;
+            }
+    }
+
+    printf("\nMenor Valor: %i na posicao %i \n", menor,imenor);
+
+    printf("[");
+    for (i = 0; i < N;i++){
+        printf("%i ", v[i]);
+    }
+    printf("]\n");
+
+    return 0;
+}*/
+
