@@ -8,61 +8,62 @@ void atirar(char tabuleiro[TAM][TAM],char tiros[TAM][TAM]){
   int linha, coluna;
   char linha_1;
 
-  printf("\nEscolha a linha aonde quer atirar:(A-G): \n");
+  printf("\nEscolha a linha à qual deseja atirar:(A - G): \n");
   scanf(" %c", &linha_1);
 
   do{
     switch (linha_1){
     case 'A':
-      linha = 1;
+      linha = 0;
       break;
     case 'B':
-      linha = 2;
+      linha = 1;
       break;
     case 'C':
-      linha = 3;
+      linha = 2;
       break;
     case 'D':
-      linha = 4;
+      linha = 3;
       break;
     case 'E':
-      linha = 5;
+      linha = 4;
       break;
     case 'F':
-      linha = 6;
+      linha = 5;
       break;
     case 'G':
-      linha = 7;
+      linha = 6;
       break;
     default:{
       printf("Cordenada Inválida.Tente Novamente, marujo:\n");
-      printf("\nEscolha a linha aonde quer atirar:(A-G): \n");
+      printf("\nEscolha a linha à qual deseja atirar:(A - G): \n");
       scanf(" %c", &linha_1);
     }
     };
-  } while (linha < 1);
+  } while (linha < 0);
 
   do{
-    printf("\nEscolha a coluna aonde quer atirar:(1-7): \n");
+    printf("\nEscolha a coluna à qual deseja atirar:(1 - 7): \n");
     scanf(" %i", &coluna);
   } while (coluna < 1 || coluna > 7);
 
-  printf("\nDISPARAR CANHAO!!!");
+  printf("\033[2J\033[H");
+  printf("\nDISPARAR CANHÃO!!!");
   printf("\n ...");
 
-  if (tabuleiro[linha - 1][coluna - 1] == '~'){
-    tabuleiro[linha - 1][coluna - 1] = 'x';
-    tiros[linha - 1][coluna - 1] = 'x';
+  if (tabuleiro[linha][coluna - 1] == '~'){
+    tabuleiro[linha][coluna - 1] = 'x';
+    tiros[linha][coluna - 1] = 'x';
     printf("\nNada foi atingindo.");
-  }
-  else{
-    if (tabuleiro[linha - 1][coluna - 1] == 'N'){
-      tabuleiro[linha - 1][coluna - 1] = '0';
-      tiros[linha - 1][coluna - 1] = '0';
+  }else{
+    if (tabuleiro[linha][coluna - 1] == 'N'){
+      tabuleiro[linha][coluna - 1] = 'o';
+      tiros[linha][coluna - 1] = 'o';
       printf("\nNavio inimigo atingido!");
     }
     else{
-      printf("\nJá atiramos aqui,capitão...");
+      printf("\nJá atiramos aqui, capitão...");
     }
+    
   }
 }

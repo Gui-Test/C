@@ -28,3 +28,16 @@ void mostraTabuleiro(char tabuleiro [TAM][TAM]){
         }
     }
 }
+
+//função para fim de jogo
+int tabuleiroVazio(char tabuleiro [TAM][TAM]){
+    for(int i=0; i<TAM; i++){
+        for(int j=0; j<TAM; j++){
+            //basicamente verifica se em alguma linha tem Navio, quando nenhuma linha tiver, ele vai retornar 1, concluindo a função na tela de JxJ.
+            if(tabuleiro[i][j]=='N'){
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
