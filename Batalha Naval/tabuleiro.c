@@ -18,7 +18,7 @@ void iniciarTabuleiro(char tabuleiro [TAM][TAM]){
 //função para printar o tabuleiro
 void mostraTabuleiro(char tabuleiro [TAM][TAM]){
     //printa os números das colunas
-    printf("\n   1 2 3 4 5 6 7");
+    printf("\n   0 1 2 3 4 5 6");
     for(int i=0; i<TAM; i++){
         //printa as letras das linhas, começa partindo de A+0=A, depois A+1=B...
         printf("\n %c", 'A' + i);

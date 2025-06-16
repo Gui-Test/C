@@ -43,27 +43,24 @@ void atirar(char tabuleiro[TAM][TAM],char tiros[TAM][TAM]){
   } while (linha < 0);
 
   do{
-    printf("\nEscolha a coluna à qual deseja atirar:(1 - 7): \n");
+    printf("\nEscolha a coluna à qual deseja atirar:(0 - 6): \n");
     scanf(" %i", &coluna);
-  } while (coluna < 1 || coluna > 7);
+  } while (coluna < 0 /*|| coluna > 6*/);
 
   printf("\033[2J\033[H");
   printf("\nDISPARAR CANHÃO!!!");
   printf("\n ...");
 
-  if (tabuleiro[linha][coluna - 1] == '~'){
-    tabuleiro[linha][coluna - 1] = 'x';
-    tiros[linha][coluna - 1] = 'x';
+  if (tabuleiro[linha][coluna] == '~'){
+    tabuleiro[linha][coluna] = 'x';
+    tiros[linha][coluna] = 'x';
     printf("\nNada foi atingindo.");
-  }else{
-    if (tabuleiro[linha][coluna - 1] == 'N'){
-      tabuleiro[linha][coluna - 1] = 'o';
-      tiros[linha][coluna - 1] = 'o';
+  }else if (tabuleiro[linha][coluna] == 'N'){
+      tabuleiro[linha][coluna] = 'o';
+      tiros[linha][coluna] = 'o';
       printf("\nNavio inimigo atingido!");
-    }
-    else{
+    }else{
       printf("\nJá atiramos aqui, capitão...");
     }
     
   }
-}

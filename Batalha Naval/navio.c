@@ -41,16 +41,16 @@ int posSub(char tabuleiro[TAM][TAM]){
             };
         } while (linha < 0);
         
-    printf("\nEscolha entre (1 - 7) que coluna quer posicionar o Sub:\n");
+    printf("\nEscolha entre (0 - 6) que coluna quer posicionar o Sub:\n");
     scanf(" %i", &coluna);
     if(coluna>TAM){
         printf("Posição inválida, tente novamente\n");
         return 0;
-    }
-    tabuleiro[linha][coluna-1] = 'N';
+    }else{
+    tabuleiro[linha][coluna] = 'N';
     return 1;
+    }
 }
-
 int posFrag(char tabuleiro[TAM][TAM]){
     int coluna, linha, dir;
     char linha_l;
@@ -91,10 +91,10 @@ int posFrag(char tabuleiro[TAM][TAM]){
             };
         } while (linha < 0);
     
-        printf("\nEscolha entre (1 - 7) para a coluna inicial da Fragata:\n");
+        printf("\nEscolha entre (0 - 6) para a coluna inicial da Fragata:\n");
         scanf(" %i", &coluna);
 
-        printf("\nDigite o número relativo a direção que está apontando:\n 1-horizontal ou 2-vertical\n");
+        printf("\nDigite o número relativo a direção que está apontando:\n1-horizontal ou 2-vertical\n");
         scanf(" %i", &dir);
         if(dir==1){
             if(coluna+1>TAM){
@@ -102,14 +102,14 @@ int posFrag(char tabuleiro[TAM][TAM]){
                 return 0;
             }
             for (int i = 0; i < 2; i++) {
-                if (tabuleiro[linha][coluna-1+i] == 'N') {
+                if (tabuleiro[linha][coluna+i] == 'N') {
                     printf("\nJá existe navio aqui, tente novamente.\n");
                     return 0;
                 }
             }
             
             for (int i = 0; i < 2; i++){
-                tabuleiro[linha][coluna-1+i] = 'N';
+                tabuleiro[linha][coluna+i] = 'N';
                 
             }
         }else if(dir==2){
@@ -118,13 +118,13 @@ int posFrag(char tabuleiro[TAM][TAM]){
                 return 0;
             }
             for (int i = 0; i < 2; i++) {
-                if (tabuleiro[linha+i][coluna-1] == 'N') {
+                if (tabuleiro[linha+i][coluna] == 'N') {
                     printf("Já existe navio aqui, tente novamente.\n");
                     return 0;
                 }
             }
             for (int i = 0; i < 2; i++){
-                tabuleiro[linha+i][coluna-1] = 'N';
+                tabuleiro[linha+i][coluna] = 'N';
                 
             }
 
@@ -175,38 +175,38 @@ int posCruz(char tabuleiro[TAM][TAM]){
             };
         } while (linha < 0);
         
-    printf("\nEscolha entre (1 - 7) para a coluna inicial do Cruzador:\n");
+    printf("\nEscolha entre (0 - 6) para a coluna inicial do Cruzador:\n");
     scanf(" %i", &coluna);
 
-    printf("\nDigite o número relativo a direção que está apontando:\n 1-horizontal ou 2-vertical\n");
+    printf("\nDigite o número relativo a direção que está apontando:\n1-horizontal ou 2-vertical\n");
     scanf(" %i", &dir);
     if(dir==1){
-        if(coluna+1>TAM){
+        if(coluna+2>TAM){
             printf("Posição inválida, tente novamente\n");
             return 0;
         }
         for (int i = 0; i < 3; i++) {
-            if (tabuleiro[linha][coluna-1+i] == 'N') {
+            if (tabuleiro[linha][coluna+i] == 'N') {
                 printf("\nJá existe navio aqui, tente novamente.\n");
                 return 0;
             }
         }
         for (int i = 0; i < 3; i++){
-            tabuleiro[linha][coluna-1+i] = 'N';
+            tabuleiro[linha][coluna+i] = 'N';
         }
     }else if(dir==2){
-        if(linha+1>TAM){
+        if(linha+2>TAM){
             printf("Posição inválida, tente novamente\n");
             return 0;
         }
         for (int i = 0; i < 3; i++) {
-            if (tabuleiro[linha+i][coluna-1] == 'N') {
+            if (tabuleiro[linha+i][coluna] == 'N') {
                 printf("Já existe navio aqui, tente novamente.\n");
                 return 0;
             }
         }
         for (int i = 0; i < 3; i++){
-            tabuleiro[linha+i][coluna-1] = 'N';
+            tabuleiro[linha+i][coluna] = 'N';
         }
 
         }else{
