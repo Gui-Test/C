@@ -1,5 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
+
+// Obs: por algum motivo o gcc não está reconhecendo o math.h então é necessário escrever "gcc L2E6_E7.c -lm"
+// na hora de compilar
 
 double seno_cosseno(double x, int n,double termo, int k);
 double seno(double x, int n);
@@ -10,9 +14,11 @@ int main(int argc, char const *argv[])
     double x = M_PI;
     int n;
     scanf(" %i", &n);
-    printf("\n Seno: %d", (seno(x,n)));
-    printf("\n Cosseno: %d", (cosseno(x,n)));
+    printf("\n Seno: %.15lf", seno(x,n));
+    printf("\n Cosseno: %.15lf", cosseno(x,n));
 }
+
+//tá endendi o que eu tava fazendo de errado %d não é pra double, é %lf
 
 
 // Seno : termo = x , k = 1;
