@@ -1,7 +1,8 @@
 #include <stdio.h>
 
-int main(int argc, char const *argv[])
-{
+//Quadrantes
+
+int main(int argc, char const *argv[]){
     float x,y;
     printf("Digite as coordenadas x e y:\n");
     scanf("%f %f", &x,&y);
