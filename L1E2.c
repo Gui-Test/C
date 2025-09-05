@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 //Triângulo
 #define N 3
 
@@ -9,7 +12,7 @@ int main(int argc, char const *argv[]){
     printf("Digite os lados do triangulo a b c:\n");
     scanf("%lf %lf %lf", &a,&b,&c);
     
-    //selection_sort: não é tão bom mas eu tinha esquecido como fazer
+    //selection_sort: não é tão bom, mas eu tinha esquecido como fazer e não queria ter que fazer if else nisso
     double v[] = {a,b,c};
     int i = 0;
     for (i; i<N-1; i++){
@@ -27,6 +30,18 @@ int main(int argc, char const *argv[]){
     printf("%lf %lf %lf \n", a, b, c);
 
     if (a >= b+c){
-        
+        printf("NAO FORMA TRIANGULO\n");
+    }else if(pow(a,2.0) == pow(b,2.0) + pow(c,2.0)){
+        printf("TRIANGULO RETANGULO\n");
+    }else if(pow(a,2.0) > pow(b,2.0) + pow(c,2.0)){
+        printf("TRIANGULO OBTUSANGULO\n");
+    }else if(pow(a,2.0) < pow(b,2.0) + pow(c,2.0)){
+        printf("TRIANGULO ACUTANGULO\n");
+    }
+
+    if(a==b && a==c && b==c){
+        printf("TRIANGULO EQUILATERO\n");
+    }else if(a==b || a==c || b==c){
+        printf("TRIANGULO ISOSCELES\n");
     }
 }
