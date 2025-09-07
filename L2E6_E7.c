@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-// Obs: por algum motivo o gcc não está reconhecendo o math.h então é necessário escrever "gcc L2E6_E7.c -lm"
+// Obs: por algum motivo o gcc não está reconhecendo o M_PI do math.h então é necessário escrever "gcc L2E6_E7.c -lm"
 // na hora de compilar
 
 double seno_cosseno(double x, int n,double termo, int k);
