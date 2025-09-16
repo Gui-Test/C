@@ -6,8 +6,9 @@ int main(int argc, char const *argv[])
 {
     int dN_dados=0,n_rolls,modificador,total;
 
+    printf("Digite seus dados(Ex: 1d20, 3d6, 4d4)\n");
     scanf("%dd%d", &n_rolls, &dN_dados);
-
+    printf("Modificador:");
     scanf("%d", &modificador);
 
     printf("\n");
@@ -20,3 +21,4 @@ int main(int argc, char const *argv[])
     }   
     printf("\n%dd%d: %d\n", n_rolls,dN_dados, total);
 }
+
