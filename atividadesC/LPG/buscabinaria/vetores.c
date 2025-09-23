@@ -21,11 +21,11 @@ int busca_binaria (int v[], int n, int chave){
     return -1; // Não encontrado!
 }
 
-void gera_valores(int v[], int n){
+void gera_valores(int v[], int n,int limite){
     int i;
     srand(time(0));
     for ( i = 0; i < n ; i++){
-        v[i] = rand() % 1000 + 1;
+        v[i] = rand() % limite + 1;
     }
 }
 
@@ -44,4 +44,49 @@ void mostra_vetor(int v[], int n){
     for ( i = 0; i < n ; i++){
         printf("[%d] : %d\n", i, v[i]);
     }
+}
+
+void mostra_matriz(int lin, int col,int x[lin][col]){
+    int i,j;
+     for (i=0;i<lin;i++){
+        for (j=0;j<col;j++){
+            printf("%d\t", x[i][j]);
+        }
+        printf("\n");
+     }
+}
+
+float media_pares(int l, int c,int x[l][c]){
+    int i,j;
+    float cont = 0;
+    float soma = 0;
+     for (i=0;i<l;i++){
+        for (j=0;j<c;j++){
+            if(x[i][j]%2 == 0){
+                soma += x[i][j];
+                cont++;
+            }
+        }
+        return (soma/cont);
+     }
+}
+
+void gera_transposta(int l, int c,int x[l][c], int t[c][l]){
+    int i,j;
+     for (i=0;i<c;i++){
+        for (j=0;j<l;j++){
+            t[i][j] = x[j][i];
+        }
+     }
+
+}
+
+void soma_matriz(int l, int c,int x[l][c], int y[l][c],int t[l][c]){
+    int i,j;
+     for (i=0;i<l;i++){
+        for (j=0;j<c;j++){
+            t[i][j] = x[i][j] + y[i][j];
+        }
+     }
+
 }
