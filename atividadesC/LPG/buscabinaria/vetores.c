@@ -3,6 +3,7 @@
 #include <time.h>
 #include "vetores.h"
 
+//Vetores
 int busca_binaria (int v[], int n, int chave){
     int ini = 0, fim = n-1, meio;
     int count = 0;
@@ -46,8 +47,14 @@ void mostra_vetor(int v[], int n){
     }
 }
 
+//Matrizes
+void gera_matriz(int lin, int col,int x[lin][col],int limite){
+    gera_valores((int*)x,lin*col,limite);
+}
+
 void mostra_matriz(int lin, int col,int x[lin][col]){
     int i,j;
+    printf("Dados da Matriz %dx%d:\n", lin,col);
      for (i=0;i<lin;i++){
         for (j=0;j<col;j++){
             printf("%d\t", x[i][j]);
@@ -89,4 +96,18 @@ void soma_matriz(int l, int c,int x[l][c], int y[l][c],int t[l][c]){
         }
      }
 
+}
+
+void multiplica_matriz(int la, int ca, int a[la][ca], int lb, int cb, int b[lb][cb], int c[la][cb]){
+    int i,j,k;
+
+    for(i=0;i<la;i++){
+        for(j=0;j<cb;j++){
+            int soma = 0;
+            for(k=0;k<ca;k++){
+                soma+= a[i][k]*b[k][j];
+            }
+            c[i][j] = soma;
+        }
+    }
 }
