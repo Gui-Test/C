@@ -1,0 +1,20 @@
+\\função strlen()
+int strlen(char str[]){
+    int i;
+    for(i = 0;str[i] != '\0';i++);
+    return i;
+}
+
+\\função strcpy()
+void strcpy(char dest[], char orig[]){
+    int i;
+    for(i = 0; orig[i] != '\0'; i++){
+        dest[i] = orig[i];
+    }
+    dest[i] = '\0';
+}
+
+\\função strcmp()
+int strcmp(char str1[], char str2[]){
+    int valor = (int)str1[0] - (int)str2[0];
+}
