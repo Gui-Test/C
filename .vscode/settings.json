@@ -2,6 +2,8 @@
     "files.associations": {
         "stdio.h": "c",
         "stdlib.h": "c",
-        "cmath": "c"
+        "cmath": "c",
+        "vetores.h": "c",
+        "time.h": "c"
     }
 }
