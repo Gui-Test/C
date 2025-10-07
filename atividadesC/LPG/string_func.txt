@@ -17,4 +17,7 @@ void strcpy(char dest[], char orig[]){
 \\função strcmp()
 int strcmp(char str1[], char str2[]){
     int valor = (int)str1[0] - (int)str2[0];
+\\valor > 0: str1 > str2
+\\valor = 0: str1 = str2
+\\valor < 0: str1 < str2
 }

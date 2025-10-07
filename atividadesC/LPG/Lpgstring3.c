@@ -4,19 +4,23 @@
 
 #define MAX 20
 
+void mostra_string(char vet[][MAX],int n);
+void ordena_string(char vet[][MAX], int n);
+
 int main(){
     char nomes[5][MAX] = {"Maria","Joao","Andre","Pedro","Mateus"};
-    mostra_strings(nomes,5);
-
-
+    mostra_string(nomes,5);
+    ordena_string(nomes, 5);
+    mostra_string(nomes,5);
 
 }
 
-void mostra_string(vet[][MAX],int n){
+void mostra_string(char vet[][MAX],int n){
     int i;
-    for(int i=0; i < n; i++){
-        printf("");
-    }
+    for(int i=0; i < n; i++)
+        printf("(%d):%s ", i, vet[i]);
+
+    printf("\n");
 }
 
 void ordena_string(char vet[][MAX], int n){
@@ -26,9 +30,10 @@ int i, j;
         for(j = i+1; j < n; j++)
             if( strcmp(vet[j], vet[i_menor]) < 0)
                 i_menor = j;
-                char aux[MAX];
-                strcpy(aux[i],vet[i]);
-                strcpy(vet[i],vet[i_menor]);
-                strcpy(vet[i_menor], aux[i]);
+
+        char aux[MAX];
+        strcpy(aux,vet[i]);
+        strcpy(vet[i],vet[i_menor]);
+        strcpy(vet[i_menor], aux);
     }
 }
