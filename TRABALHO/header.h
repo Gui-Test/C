@@ -15,7 +15,7 @@ void gera_matriz(int conjuntos[M][N], int cont);
 void cria_conj(int conjuntos[M][N], int *cont);
 void insere_dados(int conjuntos[M][N], int cont);
 void remover(int conjuntos [M][N], int *cont);
-
+void uniao(int conjuntos[M][N], int *cont);
 void inter(int conjuntos[M][N], int *cont);
 void mostra_conj(int conjuntos[M][N], int cont);
 void mostra_todos(int conjuntos[M][N], int cont);

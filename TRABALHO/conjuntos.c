@@ -96,9 +96,9 @@ void uniao(int conjuntos[M][N], int *cont){
             for(k=0;aux[k]!=0 && k<N*2;k++); //contando quantidade de elementos 
             
             if (k<N){
-                *cont++;
+                (*cont)++;
                 for(i=0;i<N;i++)
-                    conjuntos[*cont][i] = aux[i];
+                    conjuntos[*cont-1][i] = aux[i];
             }else{
                 printf("ERRO: a uniao entre os conjuntos %i e %i nao gera resultante\n", conj1, conj2);
             }

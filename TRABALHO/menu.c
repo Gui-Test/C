@@ -27,6 +27,9 @@ void menu(){
             case 3:
                 remover(conjuntos, &cont);
                 break;
+            case 4:
+                uniao(conjuntos, &cont);
+                break;
             case 5:
                 inter(conjuntos, &cont);
                 break;
