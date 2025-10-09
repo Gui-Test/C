@@ -92,19 +92,25 @@ void uniao(int conjuntos[M][N], int *cont){
                 aux[i] = conjuntos[conj1][i];
             for(j=i,i=0;conjuntos[conj2][i]!=0 && i<N;j++,i++)
                 aux[j] = conjuntos[conj2][i];
-            auxiliar(aux);
-            for(k=0;)
+            auxiliar(aux); //remove iguais
+            for(k=0;aux[k]!=0 && k<N*2;k++); //contando quantidade de elementos 
             
-            if (j<N){
+            if (k<N){
                 *cont++;
                 for(i=0;i<N;i++)
                     conjuntos[*cont][i] = aux[i];
             }else{
-
+                printf("ERRO: a uniao entre os conjuntos %i e %i nao gera resultante\n", conj1, conj2);
             }
-        }
+        }else if(conj1>=*cont && conj2>=*cont && conj1!=conj2)
+            printf("ERRO: O conjunto %i e o conjunto %i nao foram criados ainda!\n", conj1, conj2);
+        else if(conj2==conj1||conj1>=*cont)
+            printf("ERRO: O conjunto %i nao foi criado ainda!\n", conj1);
+        else 
+            printf("ERRO: O conjunto %i nao foi criado ainda!\n", conj2);
 
-    }
+    }else
+        printf("ERRO: Limite da matriz foi alcancado!\n");
 
     printf("\n");
 }
