@@ -36,7 +36,7 @@ int eh_numero(char s[]){
 //Função Exc7
 int converte_str(char s[]){
     int i;
-    for (i=0; s[i] != '\0'; i++);
+    for (i=0; s[i] != '\0'; i++); //tamanho
     int n = i-1;
     int num = 0;
     for (n,i=0;n>=0;n--,i++){
