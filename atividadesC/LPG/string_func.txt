@@ -1,11 +1,11 @@
-\\função strlen()
+//função strlen()
 int strlen(char str[]){
     int i;
     for(i = 0;str[i] != '\0';i++);
     return i;
 }
 
-\\função strcpy()
+//função strcpy()
 void strcpy(char dest[], char orig[]){
     int i;
     for(i = 0; orig[i] != '\0'; i++){
@@ -14,10 +14,10 @@ void strcpy(char dest[], char orig[]){
     dest[i] = '\0';
 }
 
-\\função strcmp()
+//função strcmp()
 int strcmp(char str1[], char str2[]){
     int valor = (int)str1[0] - (int)str2[0];
-\\valor > 0: str1 > str2
-\\valor = 0: str1 = str2
-\\valor < 0: str1 < str2
+//valor > 0: str1 > str2
+//valor = 0: str1 = str2
+//valor < 0: str1 < str2
 }
