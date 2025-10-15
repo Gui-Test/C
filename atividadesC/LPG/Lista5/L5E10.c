@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 //Exc10 Inverte String
-
 #define TAM 20
 void reverse(char s[]);
 
 int main(){
     char str[TAM];
+    printf("Digite uma String:\n");
     scanf("%s", str);
     printf("String: %s \n", str);
     reverse(str);

@@ -4,6 +4,7 @@
         "stdlib.h": "c",
         "cmath": "c",
         "vetores.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "string.h": "c"
     }
 }
