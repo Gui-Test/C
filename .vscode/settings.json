@@ -5,6 +5,7 @@
         "cmath": "c",
         "vetores.h": "c",
         "time.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "math.h": "c"
     }
 }
