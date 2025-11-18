@@ -1,0 +1,31 @@
+Lista de produtos:
+
+Produto 1:
+codigo: 123
+descricao: tala
+preco: R$20.00
+14/15/1625
+
+Produto 2:
+codigo: 0
+descricao: lenha
+preco: R$21.00
+1/1/2
+
+Produto 3:
+codigo: 5
+descricao: 5
+preco: R$5.00
+5/5/5
+
+Produto 4:
+codigo: 5
+descricao: 5
+preco: R$5.00
+5/5/5
+
+Produto 5:
+codigo: 5
+descricao: 5
+preco: R$5.00
+5/5/5
