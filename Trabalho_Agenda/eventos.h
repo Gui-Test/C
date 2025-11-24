@@ -31,5 +31,7 @@ void pesquisa_data();
 void pesquisa_desc();
 void remove_evento();
 
+void salvar_sair(Evento *ev, int n);
+
 
 #endif

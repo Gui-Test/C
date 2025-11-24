@@ -63,7 +63,7 @@ void menu(){
                 break;
             case 6:
                 printf("Saindo do programa...");
-                free(ev);
+                salvar_sair(ev,n);
                 break;
             default:
                 printf("Opcao invalida!");
