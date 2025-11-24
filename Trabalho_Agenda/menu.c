@@ -5,7 +5,7 @@
 void menu(){
     int opcao;
     int n = 0;
-    Evento *ev;
+    Evento *ev = malloc(sizeof(Evento));
     abrir_arquivo(ev,&n);
     printf("%d\n", n);
 
