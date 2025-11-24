@@ -25,6 +25,8 @@ typedef struct{
 void menu();
 void pause();
 
+void abrir_arquivo(Evento *ev, int *n);
+
 void cadastrar();
 void mostrar_eventos();
 void pesquisa_data();

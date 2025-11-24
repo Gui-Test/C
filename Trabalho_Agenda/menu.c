@@ -3,30 +3,11 @@
 #include "eventos.h"
 
 void menu(){
-    int i,opcao;
+    int opcao;
     int n = 0;
     Evento *ev;
-    FILE *f = fopen("eventos.txt", "rt" );
-    if(f == NULL){
-        printf("\nO arquivo não foi criado...\n");
-    }else{
-        fscanf(f,"Numero de eventos:%d", &n);
-
-        for(i=0;i<n;i++){
-            fscanf(f,"%d/%d/%d", &ev[i].data.dia,&ev[i].data.mes,&ev[i].data.ano);
-            fscanf(f,"%d:%d", &ev[i].inicio.hora,&ev[i].inicio.min);
-            fscanf(f,"%d:%d", &ev[i].fim.hora,&ev[i].fim.min);
-            fscanf(f," %[^\n]", ev[i].desc);
-            fscanf(f," %[^\n]", ev[i].local);
-        }
-        if(n == 0){
-            printf("\n%d Registros encontrados\n", n);
-        }else{
-            printf("\n%d Registros carregados com sucesso!\n", n);
-        }    
-    }
-    
-    fclose(f);
+    abrir_arquivo(ev,&n);
+    printf("%d\n", n);
 
     do{
         printf("\n[--- Agenda ---]\n\n");
