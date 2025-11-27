@@ -6,7 +6,7 @@ void menu(){
     int opcao;
     int n = 0;
     Evento *ev = malloc(sizeof(Evento));
-    abrir_arquivo(ev,&n);
+    abrir_arquivo(&ev,&n);
     printf("%d\n", n);
 
     do{
@@ -23,11 +23,11 @@ void menu(){
 
         switch(opcao){
             case 1:
-                cadastrar();
+                cadastrar(&ev,&n);
                 pause();
                 break;
             case 2:
-                mostrar_eventos();
+                mostrar_eventos(ev, n);
                 pause();
                 break;
             case 3:
@@ -45,7 +45,8 @@ void menu(){
             case 6:
                 printf("Saindo do programa...");
                 salvar_sair(ev,n);
-                break;
+                free(ev);
+                return;
             default:
                 printf("Opcao invalida!");
                 break;

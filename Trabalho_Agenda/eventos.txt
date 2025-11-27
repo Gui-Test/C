@@ -1,6 +1,23 @@
-Numero de eventos:1
-21/6/2026
-13:0
-14:0
-Aniversario
-Minha casa
+Numero de eventos: 2
+
+Data:
+25/07/2004
+Inicio:
+15:10
+Fim:
+16:30
+Descricao:
+Festa de inauguração
+Local:
+UDESC CCT
+
+Data:
+21/06/2026
+Inicio:
+13:00
+Fim:
+14:00
+Descricao:
+Aniversario Guilherme
+Local:
+Casa Guilherme
