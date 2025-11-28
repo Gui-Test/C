@@ -12,15 +12,15 @@ Local:
 UDESC CCT
 
 Data:
-23/09/2025
+29/02/2024
 Inicio:
-13:30
+12:30
 Fim:
-18:00
+13:30
 Descricao:
-ROBERT DAY
+Dia + ano bissexto
 Local:
-Casa do Roberto
+Planeta Terra
 
 Data:
 21/06/2026

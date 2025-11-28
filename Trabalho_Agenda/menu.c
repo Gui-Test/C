@@ -31,11 +31,11 @@ void menu(){
                 pause();
                 break;
             case 3:
-                pesquisa_data();
+                pesquisa_data(ev, n);
                 pause();
                 break;
             case 4:
-                pesquisa_desc();
+                pesquisa_desc(ev, n);
                 pause();
                 break;
             case 5:

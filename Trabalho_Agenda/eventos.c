@@ -53,11 +53,13 @@ void abrir_arquivo(Evento **ev, int *n){
     fclose(f);
 }
 
-
 //Func 1
 void cadastrar(Evento **ev, int *n){
+    Evento novo;
+    le_evento(&novo, *ev, *n);
+
     *ev = realloc(*ev, sizeof(Evento) * (*n + 1));
-    le_evento(&(*ev)[*n]);
+    (*ev)[*n] = novo;
     (*n)++;
     ordena_evento(*ev, *n);
 }
@@ -74,13 +76,46 @@ void mostrar_eventos(Evento *ev, int n){
 }
 
 //Func 3
-void pesquisa_data(){
+void pesquisa_data(Evento *ev, int n){
+    int i;
+    Data pesq;
+    printf("Digite a Data a Ser Pescada:\n");
+    le_data(&pesq);
+    printf("\nEventos na data: %d/%d/%d.\n---------------------------\n", pesq.dia, pesq.mes, pesq.ano);
 
+    for(i=0; i<n; i++)
+        if((ev)[i].data.dia == pesq.dia && (ev)[i].data.mes == pesq.mes && (ev)[i].data.ano == pesq.ano){
+            print_eva(ev[i]);
+            printf("---------------------------\n");
+        }
+    
 }
 
 //Func 4
-void pesquisa_desc(){
+void pesquisa_desc(Evento *ev, int n){
+    char pesq[50], aux[50];
+    int cont= 0;
 
+    printf("Digite a descricao que deseja pesquisar:\n");
+    scanf(" %[^\n]", pesq);
+
+    printf("\nEventos que correspondem a: \"%s\"\n", pesq);
+    printf("---------------------------\n");
+
+    for(int i = 0; i < n; i++){
+        strcpy(aux, ev[i].desc);
+        str_min(pesq);
+        str_min(aux);
+        if(strstr(aux, pesq) != NULL){
+            print_eva(ev[i]);
+            printf("---------------------------\n");
+            cont = 1;
+        }
+    }
+
+    if(!cont){
+        printf("Nenhum evento encontrado com essa descricao.\n");
+    }
 }
 
 //Func 5
@@ -97,7 +132,7 @@ void remove_evento(Evento **ev, int *n){
     for(i=0;i<np;i++){
         if((compara_data(pesqd,((*ev)[i].data)) == 0) && (compara_hora(pesqh,((*ev)[i].inicio)) == 0)){
             for(j=i;j<np-1;j++){
-                (*ev)[j] = (*ev)[j+1];  // Antes tava dando erro por causa disso: *ev[j] = *ev[j+1]; , agora tá dando certo
+                (*ev)[j] = (*ev)[j+1];  // Antes tava dando erro por causa da sintaxe: *ev[j] = *ev[j+1]; , agora tá dando certo
             }
             (*n)--;
             *ev = realloc(*ev, sizeof(Evento) * (*n));
@@ -187,13 +222,24 @@ int compara_hora(Horario a, Horario b){
         return a.min - b.min;
 }
 
-void le_evento(Evento *ev){
+void le_evento(Evento *ev, Evento *lista, int n){
+    Horario *hora;
+    int i, cont, tipo;
     printf("Cadastre a Data do Evento(*/*/*): \n");
     le_data(&ev->data);
-    printf("Cadastre Horario de Inicio do Evento(*:*): \n");
-    le_hora(&ev->inicio);
+    do{
+        tipo=0;
+    do{
+        printf("Cadastre Horario de Inicio do Evento(*:*): \n");
+        le_hora(&ev->inicio);
+    }while(conflito(*ev, lista, n, tipo));
+    tipo=1;
+    do{
     printf("Cadastre Horario de Finalização do Evento(*:*): \n");
     le_hora(&ev->fim);
+    }while(conflito(*ev, lista, n, tipo));
+    tipo=2;
+    }while(conflito(*ev, lista, n, tipo));
     printf("Descreva o Evento: ");
     scanf(" %[^\n]", ev->desc);
     printf("Cadastre o  local do Evento: ");
@@ -201,9 +247,101 @@ void le_evento(Evento *ev){
 }
 
 void le_data(Data *p){
+    do{
     scanf("%d/%d/%d", &p->dia,&p->mes,&p->ano);
+    }while(valida_data(p) != 1);
 }
 
-void le_hora(Horario *p){
+
+void le_hora(Horario *p){   
+    do{
     scanf(" %d:%d", &p->hora, &p->min);
+    }while(valida_hora(p) !=1);
 }
+
+int valida_data(Data *p){
+    int max=0;
+    int m[]={31,28,31,30,31,30,31,31,30,31,30,31};
+    if(p->mes<1 || p->mes>12){
+        printf("Mês Inválido!\n");
+        return 0;
+    }
+    if(p->mes==02 && bissexto(*p))
+        max = 29;
+    else
+        max = m[p->mes -1];
+    if(p->dia<1 || p->dia>max){
+        printf("Dia Inválido!\n");
+        return 0;
+    }
+
+    return 1;
+}
+int bissexto(Data p){
+    if(p.ano % 4 == 0 && (p.ano % 100 != 0 || p.ano % 400 == 0))
+        return 1;
+    return 0;
+}
+
+int valida_hora(Horario *p){
+    if(p->hora<00 || p->hora>23){
+        printf("Hora Inválida!");
+        return 0;
+    }
+    if(p->min<00 || p->min>59){
+        printf("Minuto Inválido!");
+        return 0;
+    }
+    return 1;
+}
+
+
+int conflito(Evento novo, Evento *ev, int n, int tipo){
+    for(int i = 0; i < n; i++){
+        if(novo.data.dia == ev[i].data.dia && novo.data.mes == ev[i].data.mes && novo.data.ano == ev[i].data.ano){
+            if(hora_maior_ou_igual(novo.inicio, ev[i].inicio) && hora_menor(novo.inicio, ev[i].fim) && tipo==0){
+                printf("\n‼ Conflito no horário de INÍCIO com Evento %d: [%d:%d - %d:%d]\nTente Novamente\n\n", i+1, ev[i].inicio.hora,ev[i].inicio.min, ev[i].fim.hora,ev[i].fim.min);
+                return 1;
+            }else if(hora_maior(novo.fim, ev[i].inicio) && hora_menor(novo.fim, ev[i].fim) && tipo==1){
+                printf("\n‼ Conflito no horário de Final com Evento %d: [%d:%d - %d:%d]\nTente Novamente\n\n", i+1, ev[i].inicio.hora,ev[i].inicio.min, ev[i].fim.hora,ev[i].fim.min);
+                return 1;
+            }else if(hora_menor(novo.inicio, ev[i].fim) && hora_maior(novo.fim,ev[i].inicio) && tipo==2){
+                printf("\n‼ Conflito no horario, invadindo horário do Evento %d: [%d:%d - %d:%d]\nTente Novamente\n\n", i+1, ev[i].inicio.hora,ev[i].inicio.min, ev[i].fim.hora,ev[i].fim.min);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+
+int hora_maior_ou_igual(Horario a, Horario b){
+    if(a.hora > b.hora)
+        return 1;
+    if(a.hora == b.hora && a.min >= b.min)
+        return 1;
+    return 0;
+}
+
+int hora_menor(Horario a, Horario b){
+    if(a.hora < b.hora)
+        return 1;
+    if(a.hora == b.hora && a.min < b.min)
+        return 1;
+    return 0;
+}
+
+int hora_maior(Horario a, Horario b){
+    if(a.hora > b.hora)
+        return 1;
+    if(a.hora == b.hora && a.min > b.min)
+        return 1;
+    return 0;
+}
+
+void str_min(char *s){
+    for(int i = 0; s[i]; i++){
+        s[i] = tolower(s[i]);
+    }
+}
+
