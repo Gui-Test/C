@@ -1,4 +1,4 @@
-Numero de eventos: 2
+Numero de eventos: 3
 
 Data:
 25/07/2004
@@ -12,6 +12,17 @@ Local:
 UDESC CCT
 
 Data:
+23/09/2025
+Inicio:
+13:30
+Fim:
+18:00
+Descricao:
+ROBERT DAY
+Local:
+Casa do Roberto
+
+Data:
 21/06/2026
 Inicio:
 13:00
@@ -21,3 +32,4 @@ Descricao:
 Aniversario Guilherme
 Local:
 Casa Guilherme
+

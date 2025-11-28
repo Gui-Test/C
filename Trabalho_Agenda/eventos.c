@@ -84,7 +84,30 @@ void pesquisa_desc(){
 }
 
 //Func 5
-void remove_evento(){
+void remove_evento(Evento **ev, int *n){
+    Data pesqd;
+    Horario pesqh;
+    printf("REMOVER EVENTO!\n");
+    printf("Digite a data do evento a ser removido(*/*/*):\n");
+    le_data(&pesqd);
+    printf("Digite a hora de inicio do evento a ser removido(*:*):\n");
+    le_hora(&pesqh);
+
+    int i,j, np = *n;
+    for(i=0;i<np;i++){
+        if((compara_data(pesqd,((*ev)[i].data)) == 0) && (compara_hora(pesqh,((*ev)[i].inicio)) == 0)){
+            for(j=i;j<np-1;j++){
+                (*ev)[j] = (*ev)[j+1];  // Antes tava dando erro por causa disso: *ev[j] = *ev[j+1]; , agora tá dando certo
+            }
+            (*n)--;
+            *ev = realloc(*ev, sizeof(Evento) * (*n));
+            printf("\nEvento Removido com Sucesso!");
+            break;
+        }
+    }
+    if(np == *n){
+        printf("\nEvento não encontrado..");
+    }
 
 }
 

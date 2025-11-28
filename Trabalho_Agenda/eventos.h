@@ -30,7 +30,7 @@ void cadastrar(Evento **ev, int *n);
 void mostrar_eventos(Evento *ev, int n);
 void pesquisa_data();
 void pesquisa_desc();
-void remove_evento();
+void remove_evento(Evento **ev, int *n);
 void salvar_sair(Evento *ev, int n);
 
 void ordena_evento(Evento *ev,int n);
@@ -42,7 +42,5 @@ void le_data(Data *p);
 void le_hora(Horario *p);
 void print_eva(Evento ev);
 void pause();
-
-
 
 #endif

@@ -39,7 +39,7 @@ void menu(){
                 pause();
                 break;
             case 5:
-                remove_evento();
+                remove_evento(&ev,&n);
                 pause();
                 break;
             case 6:
