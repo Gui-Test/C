@@ -1,4 +1,4 @@
-Numero de eventos: 3
+Numero de eventos: 4
 
 Data:
 25/07/2004
@@ -7,7 +7,7 @@ Inicio:
 Fim:
 16:30
 Descricao:
-Festa de inauguração
+Nascimento G
 Local:
 UDESC CCT
 
@@ -18,7 +18,7 @@ Inicio:
 Fim:
 13:30
 Descricao:
-Dia + ano bissexto
+Dia a+ ano bissexto
 Local:
 Planeta Terra
 
@@ -32,4 +32,15 @@ Descricao:
 Aniversario Guilherme
 Local:
 Casa Guilherme
+
+Data:
+25/07/2026
+Inicio:
+00:01
+Fim:
+23:59
+Descricao:
+Aniversario Gabriel Hamel
+Local:
+Salao de Festa
 

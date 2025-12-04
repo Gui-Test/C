@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "eventos.h"
 
 //Abrir Arquivo
@@ -67,28 +68,34 @@ void cadastrar(Evento **ev, int *n){
 //Func 2
 void mostrar_eventos(Evento *ev, int n){
     int i;
-    printf("---------------------------\n");
-    for (i = 0; i < n; i++){
-        printf("# Evento %d\n", i+1);
-        print_eva(ev[i]);
+    if(n!=0){
         printf("---------------------------\n");
-    }
+        for (i = 0; i < n; i++){
+            printf("# Evento %d\n", i+1);
+            print_eva(ev[i]);
+            printf("---------------------------\n");
+        }
+    }else
+        printf("Lista de Eventos Vazia.");
 }
 
 //Func 3
 void pesquisa_data(Evento *ev, int n){
-    int i;
+    int i, cont=0;
     Data pesq;
-    printf("Digite a Data a Ser Pescada:\n");
+    printf("Digite a Data a Ser Pesquisada:\n");
     le_data(&pesq);
     printf("\nEventos na data: %d/%d/%d.\n---------------------------\n", pesq.dia, pesq.mes, pesq.ano);
+
 
     for(i=0; i<n; i++)
         if((ev)[i].data.dia == pesq.dia && (ev)[i].data.mes == pesq.mes && (ev)[i].data.ano == pesq.ano){
             print_eva(ev[i]);
             printf("---------------------------\n");
+            cont=1;
         }
-    
+    if(!cont)
+        printf("Nenhum evento encontrado nesta data!\n");
 }
 
 //Func 4
@@ -114,7 +121,7 @@ void pesquisa_desc(Evento *ev, int n){
     }
 
     if(!cont){
-        printf("Nenhum evento encontrado com essa descricao.\n");
+        printf("Nenhum evento encontrado com essa descricao!\n");
     }
 }
 
@@ -225,20 +232,21 @@ int compara_hora(Horario a, Horario b){
 void le_evento(Evento *ev, Evento *lista, int n){
     Horario *hora;
     int i, cont, tipo;
-    printf("Cadastre a Data do Evento(*/*/*): \n");
+    printf("Cadastre a Data do Evento(*/*/*)[Ano DEVE ser maior que -10000 e menor que 100000]: \n");
     le_data(&ev->data);
     do{
         tipo=0;
-    do{
-        printf("Cadastre Horario de Inicio do Evento(*:*): \n");
-        le_hora(&ev->inicio);
-    }while(conflito(*ev, lista, n, tipo));
-    tipo=1;
-    do{
-    printf("Cadastre Horario de Finalização do Evento(*:*): \n");
-    le_hora(&ev->fim);
-    }while(conflito(*ev, lista, n, tipo));
-    tipo=2;
+        do{
+            printf("Cadastre Horario de Inicio do Evento(*:*): \n");
+            le_hora(&ev->inicio);
+        }while(conflito(*ev, lista, n, tipo));
+            tipo=1;
+        do{
+            printf("Cadastre Horario de Finalização do Evento(*:*): \n");
+            le_hora(&ev->fim);
+        }while(conflito(*ev, lista, n, tipo));
+
+        tipo=2;
     }while(conflito(*ev, lista, n, tipo));
     printf("Descreva o Evento: ");
     scanf(" %[^\n]", ev->desc);
@@ -263,7 +271,7 @@ int valida_data(Data *p){
     int max=0;
     int m[]={31,28,31,30,31,30,31,31,30,31,30,31};
     if(p->mes<1 || p->mes>12){
-        printf("Mês Inválido!\n");
+        printf("Mês Inválido!\nDigite a data Novamente(*/*/*):\n");
         return 0;
     }
     if(p->mes==02 && bissexto(*p))
@@ -271,9 +279,14 @@ int valida_data(Data *p){
     else
         max = m[p->mes -1];
     if(p->dia<1 || p->dia>max){
-        printf("Dia Inválido!\n");
+        printf("Dia Inválido!\nDigite a data Novamente(*/*/*):\n");
         return 0;
     }
+    if(p->ano<-10000 || p->ano>100000){
+        printf("Ano Inválido!\nDigite a data Novamente(*/*/*):\n");
+        return 0;
+    }
+
 
     return 1;
 }
@@ -285,11 +298,11 @@ int bissexto(Data p){
 
 int valida_hora(Horario *p){
     if(p->hora<00 || p->hora>23){
-        printf("Hora Inválida!");
+        printf("Hora Inválida!\nDigite a hora(*:*):\n");
         return 0;
     }
     if(p->min<00 || p->min>59){
-        printf("Minuto Inválido!");
+        printf("Minuto Inválido!\nDigite a hora(*:*):\n");
         return 0;
     }
     return 1;
@@ -300,15 +313,18 @@ int conflito(Evento novo, Evento *ev, int n, int tipo){
     for(int i = 0; i < n; i++){
         if(novo.data.dia == ev[i].data.dia && novo.data.mes == ev[i].data.mes && novo.data.ano == ev[i].data.ano){
             if(hora_maior_ou_igual(novo.inicio, ev[i].inicio) && hora_menor(novo.inicio, ev[i].fim) && tipo==0){
-                printf("\n‼ Conflito no horário de INÍCIO com Evento %d: [%d:%d - %d:%d]\nTente Novamente\n\n", i+1, ev[i].inicio.hora,ev[i].inicio.min, ev[i].fim.hora,ev[i].fim.min);
+                printf("\n‼ Conflito no horário de Inicio com Evento %d: [%d:%d - %d:%d]\nTente Novamente\n\n", i+1, ev[i].inicio.hora,ev[i].inicio.min, ev[i].fim.hora,ev[i].fim.min);
                 return 1;
             }else if(hora_maior(novo.fim, ev[i].inicio) && hora_menor(novo.fim, ev[i].fim) && tipo==1){
                 printf("\n‼ Conflito no horário de Final com Evento %d: [%d:%d - %d:%d]\nTente Novamente\n\n", i+1, ev[i].inicio.hora,ev[i].inicio.min, ev[i].fim.hora,ev[i].fim.min);
                 return 1;
             }else if(hora_menor(novo.inicio, ev[i].fim) && hora_maior(novo.fim,ev[i].inicio) && tipo==2){
-                printf("\n‼ Conflito no horario, invadindo horário do Evento %d: [%d:%d - %d:%d]\nTente Novamente\n\n", i+1, ev[i].inicio.hora,ev[i].inicio.min, ev[i].fim.hora,ev[i].fim.min);
+                printf("\n‼ Conflito no horario, Invadindo horário do Evento %d: [%d:%d - %d:%d]\nTente Novamente\n\n", i+1, ev[i].inicio.hora,ev[i].inicio.min, ev[i].fim.hora,ev[i].fim.min);
                 return 1;
             }
+        }else if(hora_maior_ou_igual(novo.inicio, novo.fim) && tipo==2){
+            printf("\n!! Conflito, a hora final é menor ou igual a inicial.\nTente novamente.\n\n");
+            return 1;
         }
     }
     return 0;
