@@ -12,7 +12,7 @@ int main(int argc, char const *argv[]){
     struct nodo a = {1,NULL};
     struct nodo b = {2,NULL};
     struct nodo c = {3,NULL};
-    a.link = &b;
+    //a.link = &b;
     b.link = &c;
 
     struct nodo *p = &a;
@@ -28,10 +28,6 @@ int contaNodo(struct nodo *p){
         return 0;
     }
 
-    if(p->link == NULL){
-        return 1;
-    }
-
     else{
         struct nodo *aux = p;
         cont+= 1;
@@ -42,5 +38,6 @@ int contaNodo(struct nodo *p){
     }
     return cont;
 }
+
 
 
