@@ -19,8 +19,9 @@ int reinicia(Descritor *p);
 int insere(Descritor *p, Nodo *novo, int pos);
 
 int main(){
-    Nodo a,b,c;
+    Nodo a,b,c,novo;
     Descritor desc;
+    int pos;
 
     a.dt.dia = 10;
     a.dt.mes = 6;
@@ -41,51 +42,72 @@ int main(){
     desc.tamanho = 3;
 
     Descritor *p = &desc;
+    printf("teste \n");
+
+//    reinicia(p);
+
+    printf("Digite um dia:");
+        scanf("%d", &novo.dt.dia);
+    printf("Digite um mes:");
+        scanf("%d", &novo.dt.mes);
+    printf("Digite um ano:");
+        scanf("%d", &novo.dt.ano);
+    printf("Digite uma posicao em que quer colocar:");
+        scanf("%d", &pos);
+    
+    insere(p, &novo, pos);
 }
 
+
 int reinicia(Descritor *p){
+    printf("teste entra funcao\n");
     if(p == NULL){
+        printf("teste p = null\n");
         return 0;
     }else{
+        printf("teste entra else\n");
         Nodo *aux = p->inicio;
         while (aux != NULL){
-            aux->dt.dia = NULL;
-            aux->dt.mes = NULL;
-            aux->dt.ano = NULL;
-            p->inicio = aux->link; 
+            printf("%d\n",aux->dt.ano);
+            //aux->dt.dia = NULL;
+            //aux->dt.mes = NULL;
+            //aux->dt.ano = NULL;
+            p->inicio = aux->link;
+            printf("teste p->inicio recebe aux->link\n"); 
             free(aux->link);
+            printf("apos free\n"); 
             aux = p->inicio;
-    }
+        }
         free(aux);
         p->tamanho = 0;
-        free(p->inicio);
+        p->inicio = NULL;
     }
 };
 
 int insere(Descritor *p, Nodo *novo, int pos){
     if(p->tamanho == 0){
         p->tamanho = 1;
-        p->inicio = &novo;
+        p->inicio = novo;
     }
 
     if(p->tamanho == 1){
         p->tamanho = 2;
         novo->link = p->inicio;
-        p->inicio = &novo;
+        p->inicio = novo;
     }
 
     if(pos > p->tamanho || pos < 1){
-        printf("posicao inválida!");
+        printf("posicao invalida!");
         return 0;
     }else{
         int cont = 0;
         Nodo *aux = p->inicio;
-        while(cont < pos);{
+        while(cont < pos){
             aux = aux->link;
-            cont++;
+            cont+=1;
         }
         novo->link = aux->link;
-        aux->link = &novo; 
+        aux->link = novo; 
 
         p->tamanho++;     
 
