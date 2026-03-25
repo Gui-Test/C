@@ -19,26 +19,29 @@ int reinicia(Descritor *p);
 int insere(Descritor *p, Nodo *novo, int pos);
 
 int main(){
-    Nodo a,b,c,novo;
+    Nodo *a,*b,*c,novo;
     Descritor desc;
     int pos;
 
-    a.dt.dia = 10;
-    a.dt.mes = 6;
-    a.dt.ano = 2006;
+    a = (Nodo*)malloc(sizeof(Nodo));
+    a->dt.dia = 10;
+    a->dt.mes = 6;
+    a->dt.ano = 2006;
 
-    b.dt.dia = 17;
-    b.dt.mes = 7;
-    b.dt.ano = 2007;
+    b = (Nodo*)malloc(sizeof(Nodo));
+    b->dt.dia = 17;
+    b->dt.mes = 7;
+    b->dt.ano = 2007;
+    
+    c = (Nodo*)malloc(sizeof(Nodo));
+    c->dt.dia = 5;
+    c->dt.mes = 8;
+    c->dt.ano = 2012;
 
-    c.dt.dia = 5;
-    c.dt.mes = 8;
-    c.dt.ano = 2012;
+    a->link = b;
+    b->link = c;
 
-    a.link = &b;
-    b.link = &c;
-
-    desc.inicio = &a;
+    desc.inicio = a;
     desc.tamanho = 3;
 
     Descritor *p = &desc;
