@@ -32,7 +32,7 @@ int main(){
     b->dt.dia = 17;
     b->dt.mes = 7;
     b->dt.ano = 2007;
-    
+
     c = (Nodo*)malloc(sizeof(Nodo));
     c->dt.dia = 5;
     c->dt.mes = 8;
@@ -40,6 +40,7 @@ int main(){
 
     a->link = b;
     b->link = c;
+    c->link = NULL;
 
     desc.inicio = a;
     desc.tamanho = 3;
@@ -47,9 +48,9 @@ int main(){
     Descritor *p = &desc;
     printf("teste \n");
 
-//    reinicia(p);
+    reinicia(p);
 
-    printf("Digite um dia:");
+    printf("\nDigite um dia:");
         scanf("%d", &novo.dt.dia);
     printf("Digite um mes:");
         scanf("%d", &novo.dt.mes);
@@ -59,6 +60,7 @@ int main(){
         scanf("%d", &pos);
     
     insere(p, &novo, pos);
+    printf("\nteste \n");
 }
 
 
@@ -72,12 +74,9 @@ int reinicia(Descritor *p){
         Nodo *aux = p->inicio;
         while (aux != NULL){
             printf("%d\n",aux->dt.ano);
-            //aux->dt.dia = NULL;
-            //aux->dt.mes = NULL;
-            //aux->dt.ano = NULL;
             p->inicio = aux->link;
             printf("teste p->inicio recebe aux->link\n"); 
-            free(aux->link);
+            free(aux);
             printf("apos free\n"); 
             aux = p->inicio;
         }
@@ -85,18 +84,22 @@ int reinicia(Descritor *p){
         p->tamanho = 0;
         p->inicio = NULL;
     }
-};
+}
 
 int insere(Descritor *p, Nodo *novo, int pos){
-    if(p->tamanho == 0){
+    if(p->tamanho == 0 && pos == 1){
         p->tamanho = 1;
         p->inicio = novo;
+        printf("insercao bem sucedida!");
+        return 0;
     }
 
-    if(p->tamanho == 1){
+    if(p->tamanho == 1 && pos == 1){
         p->tamanho = 2;
         novo->link = p->inicio;
         p->inicio = novo;
+        printf("insercao bem sucedida!");
+        return 0;
     }
 
     if(pos > p->tamanho || pos < 1){
@@ -113,7 +116,8 @@ int insere(Descritor *p, Nodo *novo, int pos){
         aux->link = novo; 
 
         p->tamanho++;     
+        printf("insercao bem sucedida!");
 
     }
 
-};
+}
