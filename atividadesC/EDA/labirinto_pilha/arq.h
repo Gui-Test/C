@@ -7,9 +7,10 @@
 #define FRACASSO 0
 
 typedef struct {
-    
+    int lin;
+    int col;
+    int mov;
 }info;
-
 
 struct caixa{	
 	info dados;
