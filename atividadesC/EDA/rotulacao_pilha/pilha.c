@@ -1,0 +1,75 @@
+#include "arq.h"
+
+int vazia(struct pilha *pil){
+  if (pil->topo == NULL)
+    return SIM;
+  else
+    return NAO;
+}
+
+struct pilha * cria(void){   
+    struct pilha *p=NULL;
+    p=(struct pilha *)malloc(sizeof(struct pilha));
+    if (p){
+	p->topo=NULL;
+        p->tamPilha=0;
+    }
+    return p;
+}
+
+int empilha(passo *novo, struct pilha *pil){   
+    struct caixa *aux=NULL;
+    aux=(struct caixa *) malloc(sizeof(struct caixa));
+    if (aux!=NULL){
+        memcpy(&(aux->dados),novo, sizeof(passo)); //<<<<<<<<<<
+	aux->abaixo=pil->topo;
+     	pil->topo=aux;
+	(pil->tamPilha)++;
+        return SUCESSO;
+    }else
+        return FRACASSO;
+}
+
+int desempilha(passo *reg, struct pilha *pil){
+    struct caixa *aux=NULL;	  
+    if (vazia(pil)==NAO){
+    memcpy(reg, &(pil->topo->dados),sizeof(passo)); //<<<<<<<
+	aux=pil->topo->abaixo;
+	free(pil->topo);
+	pil->topo=aux;
+        (pil->tamPilha)--;
+        return SUCESSO;
+    }else
+        return FRACASSO;
+}
+
+int busca(passo *reg, struct pilha *pil){  
+    if (vazia(pil)==NAO){   
+        memcpy(reg, &(pil->topo->dados),sizeof(passo)); //<<<<<<<
+        return SUCESSO;
+    }else
+        return FRACASSO;
+}
+
+void reinicia(struct pilha *pil){
+    struct caixa *aux=NULL;	  
+    if (vazia(pil)==NAO){	 
+	    aux=pil->topo->abaixo;
+	    while(aux!=NULL){
+            free(pil->topo);
+		    pil->topo=aux;
+		    aux=aux->abaixo;
+	    }
+
+	    free(pil->topo);
+	    pil->topo=NULL;
+        pil->tamPilha=0;
+    }
+ 	
+}
+
+struct pilha *destroi(struct pilha *pil){
+	reinicia(pil);
+	free(pil);
+  	return NULL;	
+}	
