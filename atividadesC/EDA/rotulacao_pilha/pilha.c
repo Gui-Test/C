@@ -17,11 +17,11 @@ struct pilha * cria(void){
     return p;
 }
 
-int empilha(passo *novo, struct pilha *pil){   
+int empilha(info *novo, struct pilha *pil){   
     struct caixa *aux=NULL;
     aux=(struct caixa *) malloc(sizeof(struct caixa));
     if (aux!=NULL){
-        memcpy(&(aux->dados),novo, sizeof(passo)); //<<<<<<<<<<
+        memcpy(&(aux->dados),novo, sizeof(info)); //<<<<<<<<<<
 	aux->abaixo=pil->topo;
      	pil->topo=aux;
 	(pil->tamPilha)++;
@@ -30,10 +30,10 @@ int empilha(passo *novo, struct pilha *pil){
         return FRACASSO;
 }
 
-int desempilha(passo *reg, struct pilha *pil){
+int desempilha(info *reg, struct pilha *pil){
     struct caixa *aux=NULL;	  
     if (vazia(pil)==NAO){
-    memcpy(reg, &(pil->topo->dados),sizeof(passo)); //<<<<<<<
+    memcpy(reg, &(pil->topo->dados),sizeof(info)); //<<<<<<<
 	aux=pil->topo->abaixo;
 	free(pil->topo);
 	pil->topo=aux;
@@ -43,9 +43,9 @@ int desempilha(passo *reg, struct pilha *pil){
         return FRACASSO;
 }
 
-int busca(passo *reg, struct pilha *pil){  
+int busca(info *reg, struct pilha *pil){  
     if (vazia(pil)==NAO){   
-        memcpy(reg, &(pil->topo->dados),sizeof(passo)); //<<<<<<<
+        memcpy(reg, &(pil->topo->dados),sizeof(info)); //<<<<<<<
         return SUCESSO;
     }else
         return FRACASSO;
