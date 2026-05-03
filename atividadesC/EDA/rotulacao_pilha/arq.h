@@ -5,8 +5,8 @@
 #define NAO 0
 #define SUCESSO 1
 #define FRACASSO 0
-#define M 10
-#define N 8
+#define M 20
+#define N 38
 
 typedef struct{
 	int lin;
@@ -17,6 +17,7 @@ info direcao[]={{-1,0},{0,1},{1,0},{0,-1}}; //Norte, Leste, Sul, Oeste
 
 struct caixa{	
 	info dados;
+	struct caixa *acima;
 	struct caixa *abaixo;
 };	
 
