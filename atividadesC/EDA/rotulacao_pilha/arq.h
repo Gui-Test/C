@@ -13,7 +13,7 @@ typedef struct{
 	int col;
 }info;
 
-info direcao[]={{-1,0},{0,1},{1,0},{0,-1}}; //Norte, Leste, Sul, Oeste
+//info direcao[4]={{-1,0},{0,1},{1,0},{0,-1}}; //Norte, Leste, Sul, Oeste
 
 struct caixa{	
 	info dados;
@@ -25,3 +25,15 @@ struct pilha{
 	struct caixa *topo;
 	int tamPilha;
 };
+
+//Funções da matriz
+void cria_matriz();
+
+//Funções da Pilha
+struct pilha * cria(void);
+int vazia(struct pilha *pil);
+int empilha(info *reg, struct pilha *pil);
+int desempilha(info *reg, struct pilha *pil);
+int busca(info *reg, struct pilha *pil);
+void reinicia(struct pilha *pil);
+struct pilha *destroi(struct pilha *pil);
