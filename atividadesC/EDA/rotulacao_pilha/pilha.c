@@ -22,9 +22,10 @@ int empilha(info *novo, struct pilha *pil){
     aux=(struct caixa *) malloc(sizeof(struct caixa));
     if (aux!=NULL){
         memcpy(&(aux->dados),novo, sizeof(info)); //<<<<<<<<<<
-	aux->abaixo=pil->topo;
+        pil->topo->acima = aux;
+	    aux->abaixo=pil->topo;
      	pil->topo=aux;
-	(pil->tamPilha)++;
+	    (pil->tamPilha)++;
         return SUCESSO;
     }else
         return FRACASSO;
@@ -33,10 +34,11 @@ int empilha(info *novo, struct pilha *pil){
 int desempilha(info *reg, struct pilha *pil){
     struct caixa *aux=NULL;	  
     if (vazia(pil)==NAO){
-    memcpy(reg, &(pil->topo->dados),sizeof(info)); //<<<<<<<
-	aux=pil->topo->abaixo;
-	free(pil->topo);
-	pil->topo=aux;
+        memcpy(reg, &(pil->topo->dados),sizeof(info)); //<<<<<<<
+	    aux=pil->topo->abaixo;
+	    free(pil->topo);
+	    pil->topo=aux;
+        pil->topo->acima = NULL;
         (pil->tamPilha)--;
         return SUCESSO;
     }else
@@ -56,6 +58,7 @@ void reinicia(struct pilha *pil){
     if (vazia(pil)==NAO){	 
 	    aux=pil->topo->abaixo;
 	    while(aux!=NULL){
+            aux->acima = NULL;
             free(pil->topo);
 		    pil->topo=aux;
 		    aux=aux->abaixo;
