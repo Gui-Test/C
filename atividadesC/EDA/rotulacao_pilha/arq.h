@@ -5,15 +5,11 @@
 #define NAO 0
 #define SUCESSO 1
 #define FRACASSO 0
-#define M 20
-#define N 38
 
 typedef struct{
 	int lin;
 	int col;
 }info;
-
-//info direcao[4]={{-1,0},{0,1},{1,0},{0,-1}}; //Norte, Leste, Sul, Oeste
 
 struct caixa{	
 	info dados;
@@ -26,12 +22,6 @@ struct pilha{
 	int tamPilha;
 };
 
-//Funções da matriz
-int conta_linha(FILE *f);
-int ** cria_matriz(int *m, int *n);
-void insere_matriz(int*** mat, int m, int n);
-void print_matriz(int **mat, int m, int n);
-
 //Funções da Pilha
 struct pilha * cria(void);
 int vazia(struct pilha *pil);
@@ -40,3 +30,12 @@ int desempilha(info *reg, struct pilha *pil);
 int busca(info *reg, struct pilha *pil);
 void reinicia(struct pilha *pil);
 struct pilha *destroi(struct pilha *pil);
+
+//Funções da matriz e marcador
+int conta_linha(FILE *f);
+int ** cria_matriz(int *m, int *n);
+void insere_matriz(int*** mat, int m, int n);
+void print_matriz(int **mat, int m, int n);
+info * mover(int ***mat, info dir[4], info *novo);
+int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, int m, int n);
+

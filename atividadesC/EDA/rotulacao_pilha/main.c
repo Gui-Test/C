@@ -4,6 +4,7 @@
 int main(){
     int m = 0,n = 0;
     int rotulo = 0;
+    info direcao[4]={{-1,0},{0,1},{1,0},{0,-1}}; //Norte, Leste, Sul, Oeste
 
     struct pilha *pilha;
     pilha = cria();
@@ -16,22 +17,25 @@ int main(){
     printf("\n");
 
     insere_matriz(&mat,m,n);
-
     print_matriz(mat,m,n);
+
+    int tam_objeto = 0;
+    int maior = 0;
+
+    for (int i=1;i<=m;i++){
+        for (int j=1;j<=n;j++){
+            if (mat[i][j]==1)
+                rotulo+=10;
+                tam_objeto = marcador(i,j,rotulo,pilha,direcao,&mat,m,n);
+                printf("\nObjeto %d: tamanho %d", rotulo, tam_objeto);
+                reinicia(pilha);
+        }
+    }
+
+    destroi(pilha);
 
     for(int i = 0; i<m; i++)
         free(mat[i]); 
     free(mat);
-
-    /*
-    for (int i=1;i<=M;i++){
-        for (int j=1;j<=N;j++){
-            if (mat[i][j]==1)
-                rotulo+=10;
-                marcador(i,j,direcao,rotulo,pilha);
-                reset(pilha);
-        }
-    }
-    */
    
 }
