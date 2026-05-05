@@ -27,7 +27,10 @@ struct pilha{
 };
 
 //Funções da matriz
-void cria_matriz();
+int conta_linha(FILE *f);
+int ** cria_matriz(int *m, int *n);
+void insere_matriz(int*** mat, int m, int n);
+void print_matriz(int **mat, int m, int n);
 
 //Funções da Pilha
 struct pilha * cria(void);
