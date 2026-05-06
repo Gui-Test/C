@@ -21,7 +21,7 @@ int ** cria_matriz(int *m, int *n){
     printf("\nn: %d\n", *n);
     
     //Malloc na matriz
-    mat = malloc(sizeof(int) * (*m));
+    mat = malloc(sizeof(int*) * (*m));
     for(int i=0;i < *m;i++){
         printf("%d ", i);
         mat[i] = malloc(sizeof(int) * (*n));
@@ -107,10 +107,10 @@ int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, in
         }
     }
 
-    return tam;
+    return tam; 
 }
 
-//ideia: ver se tem algum 1 em volta e copia os dados de onde esse 1 está, se não retorna null.
+//ideia: ver se tem algum 1 em volta se copia os dados de onde esse 1 está, se não, retorna null.
 //Obs: talvez de algum problema se ele tentar acessar um campo que não existe da matriz
 info * mover(int ***mat, info dir[4], info *novo){
     int l = novo->lin;
