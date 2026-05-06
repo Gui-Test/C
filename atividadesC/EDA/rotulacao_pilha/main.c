@@ -11,17 +11,16 @@ int main(){
 
     int **mat = cria_matriz(&m,&n);
 
-    printf("m: %d", m);
-    printf("\nn: %d", n);
-
     printf("\n");
 
     insere_matriz(&mat,m,n);
+
     print_matriz(mat,m,n);
 
     int tam_objeto = 0;
     int maior = 0;
 
+    /*
     for (int i=1;i<=m;i++){
         for (int j=1;j<=n;j++){
             if (mat[i][j]==1)
@@ -31,7 +30,8 @@ int main(){
                 reinicia(pilha);
         }
     }
-
+    */
+    
     destroi(pilha);
 
     for(int i = 0; i<m; i++)

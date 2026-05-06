@@ -16,10 +16,14 @@ int ** cria_matriz(int *m, int *n){
     fgets(buffer, sizeof(buffer), f);
     *n = strlen(buffer)-1;                      
     fclose(f);
+
+    printf("m: %d", *m);
+    printf("\nn: %d\n", *n);
     
     //Malloc na matriz
     mat = malloc(sizeof(int) * (*m));
     for(int i=0;i < *m;i++){
+        printf("%d ", i);
         mat[i] = malloc(sizeof(int) * (*n));
     }
 
@@ -28,7 +32,7 @@ int ** cria_matriz(int *m, int *n){
 }
 
 int conta_linha(FILE *f){
-    int nlinha = 0;
+    int nlinha = 0;      
     char ch = ' ';
     while(!feof(f)){
         ch = fgetc(f);
@@ -36,7 +40,7 @@ int conta_linha(FILE *f){
             nlinha++;
         }
     }
-    return nlinha;
+    return nlinha+1;
 }
 
 void insere_matriz(int*** mat, int m, int n){
@@ -47,6 +51,8 @@ void insere_matriz(int*** mat, int m, int n){
     }
     char ch = ' ';
     int num = 0;
+    printf("\nm: %d", m);
+    printf("\nn: %d\n", n);
     for(int i=0;i < m;i++){
         for(int j=0;j < n;j++){
             ch = fgetc(f);
@@ -56,7 +62,6 @@ void insere_matriz(int*** mat, int m, int n){
             num = ch - '0';
             (*mat)[i][j] = num;
         }
-        
     }
     fclose(f);
 }
@@ -106,6 +111,7 @@ int marcador(int i,int j,int rot, struct pilha *pil, info dir[4], int*** mat, in
 }
 
 //ideia: ver se tem algum 1 em volta e copia os dados de onde esse 1 está, se não retorna null.
+//Obs: talvez de algum problema se ele tentar acessar um campo que não existe da matriz
 info * mover(int ***mat, info dir[4], info *novo){
     int l = novo->lin;
     int c = novo->col;
