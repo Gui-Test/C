@@ -1,0 +1,41 @@
+Ainda explicando sobre árvores binárias
+
+Na arquitetura, usamos das chaves de identidficação como parâmetro para poder usar em qualquer aplicação.
+
+int buscaABB(ABB *pa, info *destino, int chave){ 
+    NoABB *aux;
+    unsigned int ret= FRACASSO;
+    aux = pa->raiz;
+    while( aux != NULL && chave != chave(aux))
+        aux = (chave < chave(aux) ? aux->esq : aux->dir);
+    if (aux != NULL){ 
+        memcpy(destino , &(aux->dados), pa->tamInfo);
+    ret = SUCESSO;
+    }
+return ret;
+}
+
+a insersão até que é de boa, porém a remoção parece ser meio esquisita, principalmente quando se remove quem tem 2 nós filhos
+
+remover ->    0
+            /   \
+           0     0
+          /  \  /  \
+         0   0  0   0
+
+aparentemente temos 2 formas de resolver isso:
+ou dir  ->    0
+            /   \
+           0     0
+          /  \  /  \
+         0   0  1   0
+aonde esq for null
+
+ou esq  ->    0
+            /   \
+           0     0
+          /  \  /  \
+         0   1  0   0
+aonde dir for null
+
+por fim vimos um pouco de como é possível percorrer as árvores binárias, sendo na horizontal ou vertical
