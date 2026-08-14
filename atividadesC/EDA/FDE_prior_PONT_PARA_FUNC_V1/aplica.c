@@ -6,7 +6,7 @@ int main(void)
   struct descF *ptr = NULL; 
 
   if((ptr=cria(sizeof(info))) == FRACASSO)
-      puts("erro fatal durante a criação do tda");
+      puts("erro fatal durante a criaï¿½ï¿½o do tda");
   else
   	menu(ptr);
   return 1;
