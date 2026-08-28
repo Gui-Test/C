@@ -36,6 +36,8 @@ int main(){
         fprintf(f, "%d ", v[i]);
     }
 
+    fclose(f);
+
 }
 
 void insertion_sort(int *v, int m){ 
