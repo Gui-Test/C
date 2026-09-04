@@ -37,6 +37,10 @@ int main(){
             j++;
             part[i] = realloc(sizeof(int)*j, part[i]);
             part[i][j] = mem[r];
+
+            if(fscanf(f,"%i ", &temp) != EOF){
+                mem[r] = temp;
+            }  
         }else{
             //tenho que arranjar uma forma de congelar o número... mas como?
         }
