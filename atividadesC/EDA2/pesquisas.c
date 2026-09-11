@@ -18,7 +18,7 @@ int main(int argc, char** argv){
     int n = atoi(argv[1]);    //negócio pra pegar o tamanho da função por parametro ".\a.exe n      "
     int k;                    //                                                    "argv[0] argv[1]"
     
-    v = malloc(sizeof(int) * n);
+    v = malloc(sizeof(int) * (n+1));
 
     cria_vetor(v, n);
 
@@ -28,9 +28,11 @@ int main(int argc, char** argv){
       printf("v[%i]: %i\n", i, v[i]);  
     }
 
-    printf("\nPesquisa Sequencial:");
+    printf("\nPesquise um numero:");
     scanf("%i", &k);
     int medio = v[rand() % n];  
+
+    printf("\nPesquisa Sequencial:");
 
     printf("\nMelhor caso: %i", pesquisaSequencial(v[0],v,n));
     printf("\nPior caso: %i", pesquisaSequencial(n,v,n));
@@ -115,7 +117,10 @@ int pesquisaInterpolacao(int chave, int v[], int n) {
     while (ini <= fim && chave >= v[ini] && chave <= v[fim]) {
         contador++;
         if (ini == fim) return v[ini] == chave ? contador : contador;
-            meio = ini + (((double) (fim - ini) / (v[fim] - v[ini])) * (chave - v[ini]));
+        
+        meio = ini + (((double) (fim - ini) / (v[fim] - v[ini])) * (chave - v[ini]));
+        contador++;
+        
         if (chave == v[meio]) {
             return contador;
         } else if (chave < v[meio]) {
