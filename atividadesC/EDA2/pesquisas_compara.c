@@ -18,6 +18,16 @@ int main(int argc, char** argv){
     int i;
     int *v;
     v = malloc(sizeof(int));
+
+    FILE *f;
+    f = fopen("pesquisas_compara.csv", "w");
+    if(f == NULL){
+        printf("Não foi possível abrir o arquivo");
+        return 0;
+    }
+    fprintf(f,"N,Sequencial,Sentinela,Binária,Interpolação");
+    fclose(f);
+
     for(i=1;i<100001;i++){
 
         int n = i;                       
