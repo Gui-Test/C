@@ -6,6 +6,7 @@ typedef struct no {
     struct no* esquerda;        //ponteiro para o nó filho a esquerda
     struct no* direita;         //ponteiro para o nó filho a direita
     int valor;                //conteúdo de um nó arbitrário da árvore
+    int altura;
 } No;
 
 typedef struct avl {
@@ -39,6 +40,7 @@ No* adiciona(AVL* AVL, int valor) {
     no->direita = NULL;
     no->esquerda = NULL;
     no->valor = valor;
+    no->altura = 0;
 
     int dir = 0;
     
@@ -98,7 +100,7 @@ No* adiciona(AVL* AVL, int valor) {
 
 void percorrer(No* no) {
     if (no != NULL) {
-        printf("hallo%i\n", no->valor);
+        printf("percorrer: %i\n", no->valor);
         percorrer(no->esquerda);
         percorrer(no->direita);
     }
