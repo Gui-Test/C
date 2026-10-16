@@ -1,14 +1,20 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include "ARB.h"
-//gcc main.c AVL.h
 
-int main(){
+int main() {
+    Arvore* a = criar();
 
-    AVL* arvr = cria(); 
-    adiciona(arvr,1);
-    adiciona(arvr,2);
-    adiciona(arvr,3);
+    adicionar(a, 2);
+    adicionar(a, 6);
+    adicionar(a, 3);
+    adicionar(a, 1);
+    adicionar(a, 5);
+    adicionar(a, 7);
+    adicionar(a, 4);
+
+    printf("In-order: ");
+    percorrer(a->raiz,visitar);
+    printf("\n");
     
-
-    percorrer(arvr->raiz);
-
 }
