@@ -14,46 +14,64 @@ typedef struct no {
 
 typedef struct arvore {
     struct no* raiz;
+    struct no* nulo;
 } Arvore;
 
 Arvore* cria();
 int vazia(Arvore* AVL);
-int max(int a, int b);
+No* criarNo(Arvore*, No*, int);
 No* localizar(No* no, int valor);
 void adicionar(Arvore* arvore, int valor);
-void percorrer(No* no, void (*callback)(int));
+void percorrer(Arvore* arvore,No* no, void (*callback)(int));
 void visitar(int valor);
 void balancear(Arvore* arvore, No* no);
 void rotacionarEsquerda(Arvore* arvore, No* no);
 void rotacionarDireita(Arvore* arvore, No* no);
 
-Arvore* criar() {
-    Arvore *ARB;
-    ARB = malloc(sizeof(Arvore));
-    ARB->raiz = NULL;
-    return ARB;
-}
 
 int vazia(Arvore* ARB) {
     return (ARB->raiz == NULL);
 }
 
-int max(int a, int b) {
-    return a > b ? a : b;
+No* criarNo(Arvore* arvore, No* pai, int valor) {
+    No* no = malloc(sizeof(No));
+
+    no->pai = pai;    
+    no->valor = valor;
+    no->direita = arvore->nulo;
+    no->esquerda = arvore->nulo;
+
+    return no;
+}
+
+Arvore* criar() {
+    Arvore *arvore = malloc(sizeof(Arvore));
+    arvore->nulo = NULL;
+    arvore->raiz = NULL;
+
+    arvore->nulo = criarNo(arvore, NULL, 0);
+    arvore->nulo->cor = Preto;
+
+    return arvore;
 }
 
 void adicionar(Arvore* arvore, int valor) {
+    if (vazia(arvore)) {
+        arvore->raiz = criarNo(arvore, arvore->nulo, valor);
+        arvore->raiz->cor = Preto;
+    } else {
+
     No* no = arvore->raiz;
 
-    while (no != NULL) {
+    while (no != arvore->nulo) {
         if (valor > no->valor) {
-            if (no->direita != NULL) {
+            if (no->direita != arvore->nulo) {
                 no = no->direita;
             } else {
                 break;
             }
         } else {
-            if (no->esquerda != NULL) {
+            if (no->esquerda != arvore->nulo) {
                 no = no->esquerda;
             } else {
                 break;
@@ -62,23 +80,15 @@ void adicionar(Arvore* arvore, int valor) {
     }
 
     printf("Adicionando %d\n", valor);
-    No* novo = malloc(sizeof(No));
-    novo->valor = valor;
-    novo->pai = no;
-    novo->esquerda = NULL;
-    novo->direita = NULL;
-    novo->cor = Vermelho;
+    No* novo = criarNo(arvore,no,valor);
 
-    if (no == NULL) {    
-        arvore->raiz = novo;
-    } else {
-        if (valor > no->valor) {
+    if (valor > no->valor) {
             no->direita = novo;
-        } else {
+    } else {
             no->esquerda = novo;
-        }
+    }
         
-        balancear(arvore, no);
+    balancear(arvore, no);
     }
 }
 
@@ -94,11 +104,19 @@ No* localizar(No* no, int valor) {
     return NULL;
 }
 
-void percorrer(No* no, void (*callback)(int)) {
-    if (no != NULL) {
-        percorrer(no->esquerda,callback);
+void percorrerInOrder(Arvore* arvore,No* no, void (*callback)(int)) {
+    if (no != arvore->nulo) {
+        percorrerInOrder(arvore,no->esquerda,callback);
         callback(no->valor);
-        percorrer(no->direita,callback);
+        percorrerInOrder(arvore,no->direita,callback);
+    }
+}
+
+void percorrerPreOrder(Arvore* arvore, No* no, void (*callback)(int)) {
+    if (no != arvore->nulo) {
+        callback(no->valor);
+        percorrerPreOrder(arvore, no->esquerda,callback);
+        percorrerPreOrder(arvore, no->direita,callback);
     }
 }
 
@@ -131,6 +149,7 @@ void balancear(Arvore* arvore, No* no) {
                 No *tio = no->pai->pai->esquerda;
                 if (tio->cor == Vermelho) {
                     tio->cor = Preto; //Resolve caso 2
+
                     no->pai->cor = Preto;
                     no->pai->pai->cor = Vermelho;
                     no = no->pai->pai; //Vai para o nível anterior
@@ -152,12 +171,12 @@ void rotacionarEsquerda(Arvore* arvore, No* no) {
     No* direita = no->direita;
     no->direita = direita->esquerda;
     
-    if (direita->esquerda != NULL)
+    if (direita->esquerda != arvore->nulo)
         direita->esquerda->pai = no; //Se houver filho à esquerda em direita, ele será pai do nó
 
     direita->pai = no->pai; //Ajusta no pai do nó à direita
 
-    if (no->pai == NULL)
+    if (no->pai == arvore->nulo)
         arvore->raiz = direita; //Se nó for raiz, o nó direita será a nova raiz da árvore
     else if (no == no->pai->esquerda)
         no->pai->esquerda = direita; //Corrige relação pai-filho do novo pai (esquerda)
@@ -172,12 +191,12 @@ void rotacionarDireita(Arvore* arvore, No* no) {
     No* esquerda = no->esquerda;
     no->esquerda = esquerda->direita;
     
-    if (esquerda->direita != NULL)
+    if (esquerda->direita != arvore->nulo)
         esquerda->direita->pai = no; //Se houver filho à direita em esquerda, ele será pai do nó
 
     esquerda->pai = no->pai; //Ajusta no pai do nó à esquerda
 
-    if (no->pai == NULL)
+    if (no->pai == arvore->nulo)
         arvore->raiz = esquerda; //Se nó for raiz, o nó esquerda será a nova raiz da árvore
     else if (no == no->pai->esquerda)
         no->pai->esquerda = esquerda; //Corrige relação pai-filho do novo pai (esquerda)
